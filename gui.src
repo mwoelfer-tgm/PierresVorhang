@@ -1,0 +1,45 @@
+DECL KRLMSG_T message
+DECL KRLMSGPAR_T parameter[3]
+DECL KRLMSGDLGSK_T buttons[9]
+DECL KRLMSGOPT_T options
+DECL INT handle, answer
+DECL BOOL present
+
+message = {modul[] "Würfel Stapeln", Nr 1, msg_text[] "Welcher Würfel soll als nächstes gewählt werden?"}
+options = {VL_STOP FALSE, Clear_P_Reset TRUE, Clear_P_SAW FALSE, Log_to_DB TRUE}
+parameter[1] = {Par_Type #Empty}
+parameter[2] = {Par_Type #Empty}
+parameter[3] = {Par_Type #Empty}
+
+buttons[1] = {sk_type #value, sk_text[] "Würfel1"}
+buttons[2] = {sk_type #value, sk_text[] "Würfel2"}
+buttons[3] = {sk_type #value, sk_text[] "Würfel3"}
+
+buttons[4] = {sk_type #EMPTY, sk_text[] "Würfel4"}
+buttons[5] = {sk_type #EMPTY, sk_text[] "Würfel5"}
+buttons[6] = {sk_type #EMPTY, sk_text[] "Würfel6"}
+
+buttons[7] = {sk_type #EMPTY, sk_text[] "Würfel7"}
+buttons[8] = {sk_type #EMPTY, sk_text[] "Würfel8"}
+buttons[9] = {sk_type #EMPTY, sk_text[] "Würfel9"}
+
+handle = Set_KrlDlg(message, parameter[],buttons[], options)
+answer = 0
+REPEAT
+present = exists_KrlDlg(handle, answer)
+UNTIL NOT(present)
+
+; INSERT CODE FROM OTHER PROGRAMMERS HERE
+
+
+DECL KrlMsg_T answer1
+DECL KrlMsg_T answer2
+DECL KrlMsg_T answer3
+
+SWITCH answer
+	CASE 1
+		answer1 = {Modul[ ] "Würfel", Nr 1001, Msg_text[ ] "Würfel Nummer 1"}
+	CASE 2
+		answer2 = {Modul[ ] "Würfel", Nr 1002, Msg_text[ ] "Würfel Nummer 2"}
+	CASE 3
+		answer3 = {Modul[ ] "Würfel", Nr 1003, Msg_text[ ] "Würfel Nummer 3"}
